@@ -1,0 +1,16 @@
+@import "../styles/vars";
+
+@mixin button(
+  $bg-color: $clr-primary,
+  $border-color: $clr-primary,
+  $color: $clr-text-light
+) {
+  border: none;
+  outline: none;
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  color: $color;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  font-family: inherit;
+}

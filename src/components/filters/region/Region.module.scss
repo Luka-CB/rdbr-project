@@ -1,0 +1,60 @@
+@import "../../../styles/index.scss";
+
+.container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 731px;
+  margin-top: 16px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  box-shadow: 4px 4px 6px #02152611;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3 {
+    font-size: 16px;
+    color: $clr-text-dark;
+  }
+
+  .regions {
+    margin-top: 24px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 0;
+
+    .region {
+      display: flex;
+      align-items: center;
+
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: $clr-success;
+      }
+
+      label {
+        margin-left: 8px;
+        font-size: 14px;
+        color: $clr-text-dark;
+      }
+    }
+  }
+
+  .chooseBtn {
+    @include button();
+    margin-top: 32px;
+    align-self: flex-end;
+    padding: 0 14px;
+    height: 33px;
+    border-radius: 8px;
+    font-size: 14px;
+
+    &:hover {
+      background-color: $clr-primary-hover;
+    }
+  }
+}
