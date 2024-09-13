@@ -14,3 +14,12 @@
   transition: all 0.1s ease-in-out;
   font-family: inherit;
 }
+
+@mixin input($border: 1px solid $clr-text-dark) {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: inherit;
+  border: $border;
+  transition: all 0.1s ease-in-out;
+}

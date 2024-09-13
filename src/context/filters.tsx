@@ -1,5 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { childrenIFace } from ".";
+
+interface pickedFiltersIface {
+  regions: string[];
+  priceRange: {
+    min: number;
+    max: number;
+  };
+  areaRange: {
+    min: number;
+    max: number;
+  };
+  bedrooms: number;
+}
 
 interface contextIFace {
   isRegionDropdownOpen: boolean;
@@ -12,12 +25,21 @@ interface contextIFace {
   toggleAreaDropdown: (value: boolean) => void;
   isbedroomDropdownOpen: boolean;
   toggleBedroomDropdown: (value: boolean) => void;
+  setPickedFilters: any;
+  pickedFilters: pickedFiltersIface;
 }
+
+const pickedFiltersFromStorage = localStorage.getItem("pickedFilters")
+  ? JSON.parse(localStorage.getItem("pickedFilters") || "")
+  : {};
 
 export const FiltersContext = createContext({} as contextIFace);
 
 const FiltersProvider = ({ children }: childrenIFace) => {
   const [activeFilter, setActiveFilter] = useState("");
+  const [pickedFilters, setPickedFilters] = useState(
+    pickedFiltersFromStorage as pickedFiltersIface
+  );
 
   const [isRegionDropdownOpen, setIsRegionDropdownOpen] = useState(false);
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
@@ -56,6 +78,12 @@ const FiltersProvider = ({ children }: childrenIFace) => {
     setActiveFilter(value ? "bedroom" : "");
   };
 
+  useEffect(() => {
+    localStorage.setItem("pickedFilters", JSON.stringify(pickedFilters));
+  }, [pickedFilters]);
+
+  console.log(pickedFilters);
+
   const values = {
     isRegionDropdownOpen,
     toggleRegionDropdown,
@@ -67,6 +95,8 @@ const FiltersProvider = ({ children }: childrenIFace) => {
     toggleAreaDropdown,
     isbedroomDropdownOpen,
     toggleBedroomDropdown,
+    pickedFilters,
+    setPickedFilters,
   };
 
   return (

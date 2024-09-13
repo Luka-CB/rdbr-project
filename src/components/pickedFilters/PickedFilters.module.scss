@@ -1,0 +1,118 @@
+@import "../../styles/index.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+
+  .pills {
+    display: flex;
+    align-items: center;
+    text-wrap: nowrap;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .regions {
+      display: flex;
+      align-items: center;
+
+      .regPill {
+        border: 1px solid #dbdbdb;
+        padding: 6px 10px;
+        border-radius: 43px;
+        display: flex;
+        align-items: center;
+
+        &:not(:first-child) {
+          margin-left: 8px;
+        }
+
+        span {
+          font-size: 14px;
+          margin-right: 4px;
+          color: rgba($clr-text-dark, 80%);
+        }
+
+        .closeIcon {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .pill {
+      border: 1px solid #dbdbdb;
+      padding: 6px 10px;
+      border-radius: 43px;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 14px;
+        margin-right: 4px;
+        color: rgba($clr-text-dark, 80%);
+
+        sup {
+          font-size: 10px;
+        }
+      }
+
+      .closeIcon {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .pricePill {
+      border: 1px solid #dbdbdb;
+      padding: 6px 10px;
+      border-radius: 43px;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+
+      .price {
+        display: flex;
+        align-items: center;
+        margin-right: 4px;
+
+        .min,
+        .max {
+          font-size: 14px;
+          color: rgba($clr-text-dark, 80%);
+        }
+
+        .dash {
+          margin: 0 5px;
+        }
+      }
+
+      .closeIcon {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .clearAll {
+    margin-left: 16px;
+    padding: 0 8px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+
+    b {
+      font-size: 14px;
+    }
+
+    &:hover {
+      background-color: #f3f3f3;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 .container {
   position: absolute;
+  background-color: #ffffff;
   top: 100%;
   left: 0;
   width: 382px;
@@ -19,6 +20,12 @@
     color: $clr-text-dark;
   }
 
+  small {
+    position: absolute;
+    margin-top: 87px;
+    color: $clr-primary;
+  }
+
   .inputs {
     width: 100%;
     margin-top: 24px;
@@ -29,7 +36,8 @@
     .col {
       width: 155px;
 
-      .inputBox {
+      .inputBox,
+      .inputBoxError {
         width: 100%;
         height: 42px;
         border: 1px solid $clr-text-gray;
@@ -37,11 +45,23 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 10px;
+        padding: 0 10px 0 0;
 
-        span {
-          font-size: 14px;
-          color: rgba($clr-text-dark, 0.4);
+        input {
+          @include input($border: none);
+          width: 90%;
+          height: 100%;
+          text-indent: 10px;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+
+        input[type="number"] {
+          -moz-appearance: textfield;
         }
 
         p {
@@ -53,6 +73,10 @@
             font-size: 10px;
           }
         }
+      }
+
+      .inputBoxError {
+        border-color: $clr-primary;
       }
 
       .options {

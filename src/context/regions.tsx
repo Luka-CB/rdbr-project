@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState } from "react";
 import api from "../utils/axios";
 import { childrenIFace } from ".";
 
-interface regionIFace {
+export interface regionIFace {
   id: number;
   name: string;
 }

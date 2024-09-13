@@ -1,27 +1,34 @@
+import { useContext, useState } from "react";
 import styles from "./Bedrooms.module.scss";
-
-const bedrooms = [
-  { id: 1, value: 1 },
-  { id: 2, value: 2 },
-  { id: 3, value: 3 },
-  { id: 4, value: 4 },
-  { id: 5, value: 5 },
-];
+import { FiltersContext } from "../../../context/filters";
 
 const Bedrooms: React.FC = () => {
+  const { setPickedFilters, pickedFilters, toggleBedroomDropdown } =
+    useContext(FiltersContext);
+
+  const [bedroomNum, setBedroomNum] = useState<number | string>(
+    pickedFilters?.bedrooms ? pickedFilters?.bedrooms : 2
+  );
+
+  const handleChooseBtn = () => {
+    setPickedFilters((prev: any) => ({
+      ...prev,
+      bedrooms: +bedroomNum,
+    }));
+    toggleBedroomDropdown(false);
+  };
+
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
       <h3>საძინებლების რაოდენობა</h3>
-      <div className={styles.bedrooms}>
-        {bedrooms.map((bedroom) => (
-          <div className={styles.boxWrapper} key={bedroom.id}>
-            <div className={styles.box}>
-              <span>{bedroom.value}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-      <button className={styles.chooseBtn}>არჩევა</button>
+      <input
+        type="number"
+        value={bedroomNum}
+        onChange={(e) => setBedroomNum(e.target.value)}
+      />
+      <button className={styles.chooseBtn} onClick={handleChooseBtn}>
+        არჩევა
+      </button>
     </div>
   );
 };

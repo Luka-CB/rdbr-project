@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Filters } from "../../components";
+import { Filters, PickedFilters } from "../../components";
 import { PlusIcon } from "../../svgs";
 import styles from "./HomeView.module.scss";
 
@@ -9,7 +9,10 @@ const HomeView: React.FC = () => {
   return (
     <main className={styles.container}>
       <header>
-        <Filters />
+        <div className="filters">
+          <Filters />
+          <PickedFilters />
+        </div>
         <div className={styles.addBtns}>
           <button className={styles.addListingBtn}>
             <PlusIcon />

@@ -6,8 +6,13 @@
 
   header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+
+    .filters {
+      display: flex;
+      flex-direction: column;
+    }
 
     .addBtns {
       display: flex;
