@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { HomeView } from "./views";
+import { AddListingView, HomeView } from "./views";
 import { Layout } from "./components";
 
 const AppRoutes = () => {
@@ -7,6 +7,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomeView />} />
+        <Route path="/add" element={<AddListingView />} />
       </Route>
     </Routes>
   );

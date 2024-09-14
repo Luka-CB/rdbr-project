@@ -1,0 +1,38 @@
+@import "../../../styles/index.scss";
+
+.container {
+  margin-top: 80px;
+
+  .title {
+    font-size: 16px;
+    color: #1a1a1f;
+    font-weight: 600;
+  }
+
+  .inputBox {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .selectInput {
+      border: 1px solid $clr-text-gray;
+      border-radius: 6px;
+      width: 384px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+
+      span {
+        color: rgba($clr-text-dark, 60%);
+      }
+    }
+  }
+}

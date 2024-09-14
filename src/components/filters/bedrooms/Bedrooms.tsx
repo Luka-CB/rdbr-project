@@ -23,6 +23,8 @@ const Bedrooms: React.FC = () => {
       <h3>საძინებლების რაოდენობა</h3>
       <input
         type="number"
+        name="bedroomNum"
+        id="bedroomNum"
         value={bedroomNum}
         onChange={(e) => setBedroomNum(e.target.value)}
       />

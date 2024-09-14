@@ -71,11 +71,17 @@ const PickedFilters: React.FC = () => {
           ))}
         </div>
 
-        {pickedFilters?.areaRange?.max && pickedFilters?.areaRange?.min ? (
+        {pickedFilters?.areaRange?.max || pickedFilters?.areaRange?.min ? (
           <div className={styles.pill}>
             <span>
-              {pickedFilters?.areaRange?.min} მ<sup>2</sup> -{" "}
-              {pickedFilters?.areaRange?.max} მ<sup>2</sup>
+              {pickedFilters?.areaRange?.min
+                ? pickedFilters?.areaRange?.min
+                : "0"}{" "}
+              მ<sup>2</sup> -{" "}
+              {pickedFilters?.areaRange?.max
+                ? pickedFilters?.areaRange?.max
+                : "~"}{" "}
+              მ<sup>2</sup>
             </span>
             <div className={styles.closeIcon} onClick={handleRemoveArea}>
               <CloseIcon />
@@ -83,16 +89,24 @@ const PickedFilters: React.FC = () => {
           </div>
         ) : null}
 
-        {pickedFilters?.priceRange?.max && pickedFilters?.priceRange?.min ? (
+        {pickedFilters?.priceRange?.max || pickedFilters?.priceRange?.min ? (
           <div className={styles.pricePill}>
             <div className={styles.price}>
               <div className={styles.min}>
-                <span>{pickedFilters?.priceRange?.min}</span>
+                <span>
+                  {pickedFilters?.priceRange?.min
+                    ? pickedFilters?.priceRange?.min
+                    : "0"}
+                </span>
                 <LariIcon />
               </div>
               <span className={styles.dash}>-</span>
               <div className={styles.max}>
-                <span>{pickedFilters?.priceRange?.max}</span>
+                <span>
+                  {pickedFilters?.priceRange?.max
+                    ? pickedFilters?.priceRange?.max
+                    : "~"}
+                </span>
                 <LariIcon />
               </div>
             </div>

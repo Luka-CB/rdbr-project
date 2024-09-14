@@ -82,8 +82,6 @@ const FiltersProvider = ({ children }: childrenIFace) => {
     localStorage.setItem("pickedFilters", JSON.stringify(pickedFilters));
   }, [pickedFilters]);
 
-  console.log(pickedFilters);
-
   const values = {
     isRegionDropdownOpen,
     toggleRegionDropdown,

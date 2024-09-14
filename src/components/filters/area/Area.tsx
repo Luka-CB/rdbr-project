@@ -33,8 +33,10 @@ const Area: React.FC = () => {
   }, [pickedMaxValue, pickedMinValue]);
 
   const handleChooseBtn = () => {
-    if (pickedMaxValue && pickedMinValue) {
-      if (+pickedMinValue > +pickedMaxValue) return;
+    if (pickedMaxValue || pickedMinValue) {
+      if (pickedMaxValue && pickedMinValue) {
+        if (+pickedMinValue > +pickedMaxValue) return;
+      }
       setPickedFilters((prev: any) => ({
         ...prev,
         areaRange: { min: +pickedMinValue, max: +pickedMaxValue },
@@ -52,6 +54,8 @@ const Area: React.FC = () => {
           <div className={errorMsg ? styles.inputBoxError : styles.inputBox}>
             <input
               type="number"
+              name="min"
+              id="min"
               placeholder="დან"
               value={pickedMinValue}
               onChange={(e) => setPickedMinValue(e.target.value)}
@@ -84,6 +88,8 @@ const Area: React.FC = () => {
           <div className={errorMsg ? styles.inputBoxError : styles.inputBox}>
             <input
               type="number"
+              name="max"
+              id="max"
               placeholder="მდე"
               value={pickedMaxValue}
               onChange={(e) => setPickedMaxValue(e.target.value)}

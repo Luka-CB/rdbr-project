@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Filters, PickedFilters } from "../../components";
 import { PlusIcon } from "../../svgs";
 import styles from "./HomeView.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const HomeView: React.FC = () => {
   const [plusIconColor, setPlusIconColor] = useState("#f93b1d");
+
+  const navigate = useNavigate();
 
   return (
     <main className={styles.container}>
@@ -14,7 +17,10 @@ const HomeView: React.FC = () => {
           <PickedFilters />
         </div>
         <div className={styles.addBtns}>
-          <button className={styles.addListingBtn}>
+          <button
+            className={styles.addListingBtn}
+            onClick={() => navigate({ pathname: "/add" })}
+          >
             <PlusIcon />
             <span>ლისტინგის დამატება</span>
           </button>

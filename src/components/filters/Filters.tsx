@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { ChevronDown } from "../../svgs";
+import { ChevronDown, ChevronUp } from "../../svgs";
 import styles from "./Filters.module.scss";
 import { RegionsContext } from "../../context/regions";
 import Region from "./region/Region";
@@ -37,7 +37,7 @@ const Filters: React.FC = () => {
           }}
         >
           <span>რეგიონი</span>
-          <ChevronDown />
+          {isRegionDropdownOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
         {isRegionDropdownOpen ? <Region /> : null}
       </div>
@@ -50,7 +50,7 @@ const Filters: React.FC = () => {
           }}
         >
           <span>საფასო კატეგორია</span>
-          <ChevronDown />
+          {isPriceDropdownOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
 
         {isPriceDropdownOpen ? <PriceCategory /> : null}
@@ -64,7 +64,7 @@ const Filters: React.FC = () => {
           }}
         >
           <span>ფართობი</span>
-          <ChevronDown />
+          {isAreaDropdownOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
 
         {isAreaDropdownOpen ? <Area /> : null}
@@ -78,7 +78,7 @@ const Filters: React.FC = () => {
           }}
         >
           <span>საძინებლების რაოდენობა</span>
-          <ChevronDown />
+          {isbedroomDropdownOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
 
         {isbedroomDropdownOpen ? <Bedrooms /> : null}

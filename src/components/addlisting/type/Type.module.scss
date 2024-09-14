@@ -1,0 +1,37 @@
+@import "../../../styles/index.scss";
+
+.container {
+  width: 100%;
+
+  .title {
+    font-size: 16px;
+    color: #1a1a1f;
+    font-weight: 600;
+  }
+
+  .inputs {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+
+    .radio {
+      display: flex;
+      align-items: center;
+
+      &:not(:first-child) {
+        margin-left: 32px;
+      }
+
+      input[type="radio"] {
+        width: 17px;
+        height: 17px;
+        accent-color: $clr-text-dark;
+      }
+
+      label {
+        margin-left: 7px;
+        color: $clr-text-dark;
+      }
+    }
+  }
+}
