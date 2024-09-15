@@ -1,4 +1,8 @@
-const CheckIcon: React.FC = () => {
+interface propsIFace {
+  color?: string | undefined;
+}
+
+const CheckIcon: React.FC<propsIFace> = ({ color = "#021526" }) => {
   return (
     <svg
       width="11"
@@ -9,7 +13,7 @@ const CheckIcon: React.FC = () => {
     >
       <path
         d="M10 1.40918L3.125 9.591L0 5.87199"
-        stroke="#021526"
+        stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
