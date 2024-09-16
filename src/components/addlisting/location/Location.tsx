@@ -5,15 +5,15 @@ import SelectInputs from "./select/SelectInputs";
 interface propsIFace {
   values: {
     address: string;
-    zipCode: string;
+    zip_code: string;
   };
   touched: {
     address: boolean | undefined;
-    zipCode: boolean | undefined;
+    zip_code: boolean | undefined;
   };
   errors: {
     address: string | undefined;
-    zipCode: string | undefined;
+    zip_code: string | undefined;
   };
   handleChange: any;
   handleBlur: any;
@@ -68,34 +68,34 @@ const Location: React.FC<propsIFace> = ({
             </div>
           </div>
           <div className={styles.inputBox}>
-            <label htmlFor="zipCode">საფოსტო ინდექსი *</label>
+            <label htmlFor="zip_code">საფოსტო ინდექსი *</label>
             <input
               type="text"
-              name="zipCode"
-              id="zipCode"
-              value={values.zipCode}
+              name="zip_code"
+              id="zip_code"
+              value={values.zip_code}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
-                errors.zipCode && touched.zipCode
+                errors.zip_code && touched.zip_code
                   ? styles.inputError
                   : undefined
               }
             />
             <div
               className={
-                errors.zipCode && touched.zipCode
+                errors.zip_code && touched.zip_code
                   ? styles.msgError
-                  : !errors.zipCode && values.zipCode
+                  : !errors.zip_code && values.zip_code
                   ? styles.msgSuccess
                   : styles.msg
               }
             >
               <CheckIcon
                 color={
-                  !errors.zipCode && values.zipCode
+                  !errors.zip_code && values.zip_code
                     ? "#45a849"
-                    : errors.zipCode && touched.zipCode
+                    : errors.zip_code && touched.zip_code
                     ? "#f93b1d"
                     : undefined
                 }

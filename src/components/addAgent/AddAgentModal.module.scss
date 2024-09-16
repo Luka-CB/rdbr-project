@@ -1,0 +1,116 @@
+@import "../../styles/index.scss";
+
+.modalBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(7, 7, 7, 0.213);
+  backdrop-filter: blur(4px);
+
+  .modal {
+    background-color: $clr-text-light;
+    width: 1009px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 87px 105px;
+    border-radius: 10px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.205);
+
+    .title {
+      text-align: center;
+      font-size: 32px;
+      color: $clr-text-dark;
+    }
+
+    form {
+      margin-top: 61px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .inputGroup {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:not(:first-child) {
+          margin-top: 28px;
+        }
+
+        .inputBox {
+          display: flex;
+          flex-direction: column;
+          width: 384px;
+
+          label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+
+          input {
+            @include input();
+            width: 384px;
+            height: 42px;
+            border-color: $clr-text-gray;
+            border-radius: 6px;
+            text-indent: 10px;
+          }
+
+          .msg,
+          .msgError,
+          .msgSuccess {
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+
+            small {
+              font-size: 14px;
+              font-family: 500;
+              margin-left: 7px;
+            }
+          }
+        }
+      }
+
+      .btns {
+        margin-top: 94px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .cancelBtn {
+          @include button($bg-color: transparent, $color: $clr-primary);
+          padding: 14px 16px;
+          border-radius: 10px;
+          font-size: 16px;
+          font-weight: 600;
+          margin-right: 15px;
+
+          &:hover {
+            background-color: $clr-primary;
+            color: $clr-text-light;
+          }
+        }
+
+        .addBtn {
+          @include button();
+          padding: 14px 16px;
+          border-radius: 10px;
+          font-size: 16px;
+          font-weight: 600;
+
+          &:hover {
+            background-color: $clr-primary-hover;
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,26 +8,19 @@ const AddListingView: React.FC = () => {
     console.log("so");
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      address: "",
-      zipCode: "",
-      price: "",
-      area: "",
-      bedrooms: "",
-      description: "",
-    },
-    validationSchema: addListingSchema,
-    onSubmit,
-  });
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: {
+        address: "",
+        zip_code: "",
+        price: "",
+        area: "",
+        bedrooms: "",
+        description: "",
+      },
+      validationSchema: addListingSchema,
+      onSubmit,
+    });
 
   return (
     <main className={styles.container}>
@@ -35,9 +28,9 @@ const AddListingView: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <Type />
         <Location
-          values={{ address: values.address, zipCode: values.zipCode }}
-          touched={{ address: touched.address, zipCode: touched.zipCode }}
-          errors={{ address: errors.address, zipCode: errors.zipCode }}
+          values={{ address: values.address, zip_code: values.zip_code }}
+          touched={{ address: touched.address, zip_code: touched.zip_code }}
+          errors={{ address: errors.address, zip_code: errors.zip_code }}
           handleChange={handleChange}
           handleBlur={handleBlur}
         />

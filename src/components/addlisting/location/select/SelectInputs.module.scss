@@ -3,6 +3,7 @@
 .inputBox {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   label {
     font-size: 14px;
@@ -10,7 +11,8 @@
     margin-bottom: 5px;
   }
 
-  .selectInput {
+  .selectInput,
+  .selectInputActive {
     border: 1px solid $clr-text-gray;
     border-radius: 6px;
     width: 384px;
@@ -20,8 +22,18 @@
     justify-content: space-between;
     padding: 0 10px;
 
-    span {
+    .value,
+    .valueActive {
       color: rgba($clr-text-dark, 60%);
     }
+
+    .valueActive {
+      color: $clr-text-dark;
+    }
+  }
+
+  .selectInputActive {
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
   }
 }

@@ -7,15 +7,24 @@ export interface regionIFace {
   name: string;
 }
 
+export interface cityIFace {
+  id: number;
+  name: string;
+  region_id: number;
+}
+
 interface contextIFace {
   regions: regionIFace[];
   fetchRegions: () => void;
+  cities: cityIFace[];
+  fetchCities: () => void;
 }
 
 export const RegionsContext = createContext({} as contextIFace);
 
 const RegionsProvider = ({ children }: childrenIFace) => {
   const [regions, setRegions] = useState<regionIFace[]>([]);
+  const [cities, setCities] = useState<cityIFace[]>([]);
 
   const fetchRegions = async () => {
     try {
@@ -27,9 +36,21 @@ const RegionsProvider = ({ children }: childrenIFace) => {
     }
   };
 
+  const fetchCities = async () => {
+    try {
+      const { data } = await api.get("/cities");
+
+      if (data) setCities(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const values = {
     regions,
     fetchRegions,
+    cities,
+    fetchCities,
   };
 
   return (

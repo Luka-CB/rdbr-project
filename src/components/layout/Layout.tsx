@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import Header from "../header/Header";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FiltersContext } from "../../context/filters";
+import { FormSelectContext } from "../../context/formSelectContext";
+import AddAgentModal from "../addAgent/AddAgentModal";
+import { AgentContext } from "../../context/agentContext";
 
 const Layout: React.FC = () => {
+  const { isModalOpen, isAgentDropdownOpen, toggleAgentDropdown } =
+    useContext(AgentContext);
+
   const {
     isRegionDropdownOpen,
     toggleRegionDropdown,
@@ -16,22 +22,44 @@ const Layout: React.FC = () => {
     toggleBedroomDropdown,
   } = useContext(FiltersContext);
 
+  const {
+    isRegionSelectActive,
+    toggleRegionSelect,
+    isCitySelectActive,
+    toggleCitySelect,
+  } = useContext(FormSelectContext);
+
   const handleClosePopups = () => {
     if (
       isRegionDropdownOpen ||
       isPriceDropdownOpen ||
       isAreaDropdownOpen ||
-      isbedroomDropdownOpen
+      isbedroomDropdownOpen ||
+      isRegionSelectActive ||
+      isCitySelectActive ||
+      isAgentDropdownOpen
     ) {
       toggleRegionDropdown(false);
       togglePriceDropdown(false);
       toggleAreaDropdown(false);
       toggleBedroomDropdown(false);
+      toggleRegionSelect(false);
+      toggleCitySelect(false);
+      toggleAgentDropdown(false);
     }
   };
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isModalOpen]);
+
   return (
     <main className={styles.container} onClick={handleClosePopups}>
+      {isModalOpen ? <AddAgentModal /> : null}
       <Header />
       <Outlet />
     </main>

@@ -5,6 +5,7 @@ import LariIcon from "./LariIcon";
 import CloseIcon from "./CloseIcon";
 import CheckIcon from "./CheckIcon";
 import PlusCircleIcon from "./PlusCircleIcon";
+import TrashIcon from "./TrachIcon";
 
 export {
   ChevronDown,
@@ -14,4 +15,5 @@ export {
   CloseIcon,
   CheckIcon,
   PlusCircleIcon,
+  TrashIcon,
 };

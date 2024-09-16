@@ -1,7 +1,7 @@
 @import "../../styles/index.scss";
 
 .container {
-  margin-top: 20px;
+  margin-top: 28px;
   display: flex;
   flex-direction: column;
 
@@ -11,24 +11,55 @@
     margin-bottom: 5px;
   }
 
-  label {
+  .uploadBox {
     width: 100%;
     height: 120px;
+    border: 1.5px dashed #2d3648;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
 
-    .uploadBox {
+    &:hover {
+      border-color: $clr-text-gray;
+    }
+
+    .image {
+      width: 92px;
+      height: 82px;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .removeIcon {
+        position: absolute;
+        top: 78%;
+        left: 80%;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid $clr-text-dark;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $clr-text-light;
+        cursor: pointer;
+      }
+    }
+
+    label {
       width: 100%;
       height: 100%;
-      border: 1.5px dashed #2d3648;
-      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        border-color: $clr-text-gray;
-      }
     }
   }
 }
