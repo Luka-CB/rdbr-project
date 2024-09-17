@@ -1,3 +1,4 @@
+import { FormikErrors, FormikTouched } from "formik";
 import { CheckIcon } from "../../../svgs";
 import styles from "./Details.module.scss";
 
@@ -9,16 +10,40 @@ interface propsIFace {
     description: string;
   };
   touched: {
-    price: boolean | undefined;
-    area: boolean | undefined;
-    bedrooms: boolean | undefined;
-    description: boolean | undefined;
+    price: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
+    area: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
+    bedrooms: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
+    description:
+      | boolean
+      | FormikTouched<any>
+      | FormikTouched<any>[]
+      | undefined;
   };
   errors: {
-    price: string | undefined;
-    area: string | undefined;
-    bedrooms: string | undefined;
-    description: string | undefined;
+    price:
+      | string
+      | string[]
+      | FormikErrors<any>
+      | FormikErrors<any>[]
+      | undefined;
+    area:
+      | string
+      | string[]
+      | FormikErrors<any>
+      | FormikErrors<any>[]
+      | undefined;
+    bedrooms:
+      | string
+      | string[]
+      | FormikErrors<any>
+      | FormikErrors<any>[]
+      | undefined;
+    description:
+      | string
+      | string[]
+      | FormikErrors<any>
+      | FormikErrors<any>[]
+      | undefined;
   };
   handleChange: any;
   handleBlur: any;

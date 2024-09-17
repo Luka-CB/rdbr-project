@@ -3,7 +3,9 @@ import styles from "./Type.module.scss";
 import { AddListingFormContext } from "../../../context/addListingFormContext";
 
 const Type: React.FC = () => {
-  const { setIsRental, isRentalError } = useContext(AddListingFormContext);
+  const { handleSetIsRental, isRentalError, isRental } = useContext(
+    AddListingFormContext
+  );
 
   return (
     <div className={styles.container}>
@@ -14,8 +16,9 @@ const Type: React.FC = () => {
             type="radio"
             name="isRental"
             id="forSale"
+            checked={isRental === "0"}
             value={0}
-            onChange={(e) => setIsRental(e.target.value)}
+            onChange={(e) => handleSetIsRental(e.target.value)}
           />
           <label htmlFor="forSale">იყიდება</label>
         </div>
@@ -24,8 +27,9 @@ const Type: React.FC = () => {
             type="radio"
             name="isRental"
             id="forRant"
+            checked={isRental === "1"}
             value={1}
-            onChange={(e) => setIsRental(e.target.value)}
+            onChange={(e) => handleSetIsRental(e.target.value)}
           />
           <label htmlFor="forRant">ქირავდება</label>
         </div>

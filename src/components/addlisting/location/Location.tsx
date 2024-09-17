@@ -1,3 +1,4 @@
+import { FormikErrors, FormikTouched } from "formik";
 import { CheckIcon } from "../../../svgs";
 import styles from "./Location.module.scss";
 import SelectInputs from "./select/SelectInputs";
@@ -8,12 +9,22 @@ interface propsIFace {
     zip_code: string;
   };
   touched: {
-    address: boolean | undefined;
-    zip_code: boolean | undefined;
+    address: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
+    zip_code: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
   };
   errors: {
-    address: string | undefined;
-    zip_code: string | undefined;
+    address:
+      | string
+      | string[]
+      | FormikErrors<any>
+      | FormikErrors<any>[]
+      | undefined;
+    zip_code:
+      | string
+      | string[]
+      | FormikErrors<any>
+      | FormikErrors<any>[]
+      | undefined;
   };
   handleChange: any;
   handleBlur: any;

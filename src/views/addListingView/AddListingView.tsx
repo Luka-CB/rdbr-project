@@ -2,25 +2,57 @@ import { useFormik } from "formik";
 import { Agent, Details, Location, Type, UploadImage } from "../../components";
 import { addListingSchema } from "../../utils/inputValidationSchemas";
 import styles from "./AddlistingView.module.scss";
+import { useContext, useEffect } from "react";
+import { AddListingFormContext } from "../../context/addListingFormContext";
 
 const AddListingView: React.FC = () => {
+  const { isRental, setIsRentalError } = useContext(AddListingFormContext);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   const onSubmit = () => {
+    if (!isRental) {
+      scrollToTop();
+      setIsRentalError("ქთხოვთ აირჩიოთ გარიგების ტიპი!");
+      return;
+    }
+
     console.log("so");
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        address: "",
-        zip_code: "",
-        price: "",
-        area: "",
-        bedrooms: "",
-        description: "",
+        address: localStorage.getItem("inputData")
+          ? JSON.parse(localStorage.getItem("inputData") || "").address
+          : "",
+        zip_code: localStorage.getItem("inputData")
+          ? JSON.parse(localStorage.getItem("inputData") || "").zip_code
+          : "",
+        price: localStorage.getItem("inputData")
+          ? JSON.parse(localStorage.getItem("inputData") || "").price
+          : "",
+        area: localStorage.getItem("inputData")
+          ? JSON.parse(localStorage.getItem("inputData") || "").area
+          : "",
+        bedrooms: localStorage.getItem("inputData")
+          ? JSON.parse(localStorage.getItem("inputData") || "").bedrooms
+          : "",
+        description: localStorage.getItem("inputData")
+          ? JSON.parse(localStorage.getItem("inputData") || "").description
+          : "",
       },
       validationSchema: addListingSchema,
       onSubmit,
     });
+
+  useEffect(() => {
+    if (values) {
+      localStorage.setItem("inputData", JSON.stringify(values));
+    }
+  }, [values]);
 
   return (
     <main className={styles.container}>
