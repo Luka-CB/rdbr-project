@@ -3,53 +3,128 @@ import { PlusCircleIcon, TrashIcon } from "../../svgs";
 import styles from "./UploadImage.module.scss";
 import { ImageContext } from "../../context/imageContext";
 
-const UploadImage: React.FC = () => {
-  const { image, imageError, setImageError, setImage, handleRemoveImage } =
-    useContext(ImageContext);
+interface propsIFace {
+  isAgent?: boolean;
+}
+
+const UploadImage: React.FC<propsIFace> = ({ isAgent = false }) => {
+  const {
+    listingImage,
+    listingImageError,
+    setListingImageError,
+    setListingImage,
+    handleRemoveListingImage,
+    agentImage,
+    agentImageError,
+    setAgentImageError,
+    setAgentImage,
+    handleRemoveAgentImage,
+  } = useContext(ImageContext);
 
   const handleChooseFile = (file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      if (file.size > 1000000) {
-        return setImageError("სურათი არ უნდა აღებმატებოდეს 1mb-ს ზომაში!");
+      if (isAgent) {
+        if (file.size > 1000000) {
+          return setAgentImageError(
+            "სურათი არ უნდა აღებმატებოდეს 1mb-ს ზომაში!"
+          );
+        }
+        setAgentImage({
+          size: file.size,
+          url: reader.result as string,
+        });
+      } else {
+        if (file.size > 1000000) {
+          return setListingImageError(
+            "სურათი არ უნდა აღებმატებოდეს 1mb-ს ზომაში!"
+          );
+        }
+        setListingImage({
+          size: file.size,
+          url: reader.result as string,
+        });
       }
-      setImage({
-        size: file.size,
-        url: reader.result as string,
-      });
     };
     reader.readAsDataURL(file);
   };
 
   return (
-    <div className={styles.container}>
-      <b>ატვირთეთ ფოტო *</b>
-      <div className={imageError ? styles.uploadBoxError : styles.uploadBox}>
-        {image?.url ? (
-          <div className={styles.image}>
-            <img src={image?.url} alt="image" />
-            <div className={styles.removeIcon} onClick={handleRemoveImage}>
-              <TrashIcon />
-            </div>
+    <>
+      {isAgent ? (
+        <div className={styles.container}>
+          <b>ატვირთეთ ფოტო *</b>
+          <div
+            className={
+              agentImageError ? styles.uploadBoxError : styles.uploadBox
+            }
+          >
+            {agentImage?.url ? (
+              <div className={styles.image}>
+                <img src={agentImage?.url} alt="image" />
+                <div
+                  className={styles.removeIcon}
+                  onClick={handleRemoveAgentImage}
+                >
+                  <TrashIcon />
+                </div>
+              </div>
+            ) : (
+              <label htmlFor="file">
+                <PlusCircleIcon />
+                {agentImageError ? <small>{agentImageError}</small> : null}
+              </label>
+            )}
           </div>
-        ) : (
-          <label htmlFor="file">
-            <PlusCircleIcon />
-            {imageError ? <small>{imageError}</small> : null}
-          </label>
-        )}
-      </div>
-      <input
-        type="file"
-        name="file"
-        id="file"
-        accept="image/*"
-        hidden
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          e.target.files !== null && handleChooseFile(e.target.files[0])
-        }
-      />
-    </div>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept="image/*"
+            hidden
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              e.target.files !== null && handleChooseFile(e.target.files[0])
+            }
+          />
+        </div>
+      ) : (
+        <div className={styles.container}>
+          <b>ატვირთეთ ფოტო *</b>
+          <div
+            className={
+              listingImageError ? styles.uploadBoxError : styles.uploadBox
+            }
+          >
+            {listingImage?.url ? (
+              <div className={styles.image}>
+                <img src={listingImage?.url} alt="image" />
+                <div
+                  className={styles.removeIcon}
+                  onClick={handleRemoveListingImage}
+                >
+                  <TrashIcon />
+                </div>
+              </div>
+            ) : (
+              <label htmlFor="file">
+                <PlusCircleIcon />
+                {listingImageError ? <small>{listingImageError}</small> : null}
+              </label>
+            )}
+          </div>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept="image/*"
+            hidden
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              e.target.files !== null && handleChooseFile(e.target.files[0])
+            }
+          />
+        </div>
+      )}
+    </>
   );
 };
 

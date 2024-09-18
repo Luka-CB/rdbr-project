@@ -9,7 +9,7 @@ import { ImageContext } from "../../context/imageContext";
 import { AgentContext } from "../../context/agentContext";
 
 const AddListingView: React.FC = () => {
-  const { image, setImageError } = useContext(ImageContext);
+  const { listingImage, setListingImageError } = useContext(ImageContext);
   const { pickedAgent, setAgentError } = useContext(AgentContext);
   const { isRental } = useContext(AddListingFormContext);
   const { pickedRegion, pickedCity, setRegionError, setCityError } =
@@ -32,8 +32,8 @@ const AddListingView: React.FC = () => {
       return;
     }
 
-    if (!image?.url) {
-      setImageError("გთხოვთ აირჩიოთ სურათი!");
+    if (!listingImage?.url) {
+      setListingImageError("გთხოვთ აირჩიოთ სურათი!");
       return;
     }
 
@@ -42,20 +42,16 @@ const AddListingView: React.FC = () => {
       return;
     }
 
-    const inputData = localStorage.getItem("inputData")
-      ? JSON.parse(localStorage.getItem("inputData") || "")
-      : {};
-
     const data = {
-      address: inputData?.address,
-      image: image?.url,
+      address: values?.address,
+      image: listingImage?.url,
       region_id: pickedRegion?.id,
-      description: inputData?.description,
+      description: values?.description,
       city_id: pickedCity?.id,
-      zip_code: inputData?.zip_code,
-      price: +inputData?.price,
-      area: +inputData?.area,
-      bedrooms: +inputData?.bedrooms,
+      zip_code: values?.zip_code,
+      price: +values?.price,
+      area: +values?.area,
+      bedrooms: +values?.bedrooms,
       isRental: +isRental,
       agent_id: pickedAgent?.id,
     };

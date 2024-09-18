@@ -61,14 +61,14 @@ const Location: React.FC<propsIFace> = ({
               className={
                 errors.address && touched.address
                   ? styles.msgError
-                  : !errors.address && values.address.length >= 2
+                  : !errors.address && touched.address
                   ? styles.msgSuccess
                   : styles.msg
               }
             >
               <CheckIcon
                 color={
-                  !errors.address && values.address.length >= 2
+                  !errors.address && touched.address
                     ? "#45a849"
                     : errors.address && touched.address
                     ? "#f93b1d"
@@ -97,14 +97,14 @@ const Location: React.FC<propsIFace> = ({
               className={
                 errors.zip_code && touched.zip_code
                   ? styles.msgError
-                  : !errors.zip_code && values.zip_code
+                  : !errors.zip_code && touched.zip_code
                   ? styles.msgSuccess
                   : styles.msg
               }
             >
               <CheckIcon
                 color={
-                  !errors.zip_code && values.zip_code
+                  !errors.zip_code && touched.zip_code
                     ? "#45a849"
                     : errors.zip_code && touched.zip_code
                     ? "#f93b1d"

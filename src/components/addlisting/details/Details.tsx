@@ -56,8 +56,6 @@ const Details: React.FC<propsIFace> = ({
   handleBlur,
   handleChange,
 }) => {
-  const atLeastFiveWords = /^(?:\b\w+\b[\s\r\n]*){5,}$/;
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>ბინის დეტალები</h2>
@@ -80,14 +78,14 @@ const Details: React.FC<propsIFace> = ({
               className={
                 errors.price && touched.price
                   ? styles.msgError
-                  : !errors.price && values.price
+                  : !errors.price && touched.price
                   ? styles.msgSuccess
                   : styles.msg
               }
             >
               <CheckIcon
                 color={
-                  !errors.price && values.price
+                  !errors.price && touched.price
                     ? "#45a849"
                     : errors.price && touched.price
                     ? "#f93b1d"
@@ -114,14 +112,14 @@ const Details: React.FC<propsIFace> = ({
               className={
                 errors.area && touched.area
                   ? styles.msgError
-                  : !errors.area && values.area
+                  : !errors.area && touched.area
                   ? styles.msgSuccess
                   : styles.msg
               }
             >
               <CheckIcon
                 color={
-                  !errors.area && values.area
+                  !errors.area && touched.area
                     ? "#45a849"
                     : errors.area && touched.area
                     ? "#f93b1d"
@@ -151,14 +149,14 @@ const Details: React.FC<propsIFace> = ({
             className={
               errors.bedrooms && touched.bedrooms
                 ? styles.msgError
-                : !errors.bedrooms && values.bedrooms
+                : !errors.bedrooms && touched.bedrooms
                 ? styles.msgSuccess
                 : styles.msg
             }
           >
             <CheckIcon
               color={
-                !errors.bedrooms && values.bedrooms
+                !errors.bedrooms && touched.bedrooms
                   ? "#45a849"
                   : errors.bedrooms && touched.bedrooms
                   ? "#f93b1d"
@@ -186,15 +184,14 @@ const Details: React.FC<propsIFace> = ({
             className={
               errors.description && touched.description
                 ? styles.msgError
-                : !errors.description &&
-                  atLeastFiveWords.test(values.description)
+                : !errors.description && touched.description
                 ? styles.msgSuccess
                 : styles.msg
             }
           >
             <CheckIcon
               color={
-                !errors.description && atLeastFiveWords.test(values.description)
+                !errors.description && touched.description
                   ? "#45a849"
                   : errors.description && touched.description
                   ? "#f93b1d"

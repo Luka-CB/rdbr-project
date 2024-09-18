@@ -6,42 +6,65 @@ interface imageIface {
   url: string;
 }
 
-const imageFromStorage = localStorage.getItem("image")
-  ? JSON.parse(localStorage.getItem("image") || "")
+const listingImageFromStorage = localStorage.getItem("listingImage")
+  ? JSON.parse(localStorage.getItem("listingImage") || "")
   : {};
 
 interface contextIface {
-  image: imageIface;
-  setImage: any;
-  handleRemoveImage: () => void;
-  imageError: string;
-  setImageError: any;
+  listingImage: imageIface;
+  setListingImage: any;
+  handleRemoveListingImage: () => void;
+  listingImageError: string;
+  setListingImageError: any;
+  agentImage: imageIface;
+  setAgentImage: any;
+  handleRemoveAgentImage: () => void;
+  agentImageError: string;
+  setAgentImageError: any;
 }
 
 export const ImageContext = createContext({} as contextIface);
 
 const ImageProvider = ({ children }: childrenIFace) => {
-  const [image, setImage] = useState(imageFromStorage as imageIface);
-  const [imageError, setImageError] = useState("");
+  const [listingImage, setListingImage] = useState(
+    listingImageFromStorage as imageIface
+  );
+  const [listingImageError, setListingImageError] = useState("");
 
-  const handleRemoveImage = () => {
-    setImage({} as imageIface);
-    localStorage.removeItem("image");
+  const [agentImage, setAgentImage] = useState({} as imageIface);
+  const [agentImageError, setAgentImageError] = useState("");
+
+  const handleRemoveListingImage = () => {
+    setListingImage({} as imageIface);
+    localStorage.removeItem("listingImage");
+  };
+
+  const handleRemoveAgentImage = () => {
+    setAgentImage({} as imageIface);
   };
 
   useEffect(() => {
-    if (image.url) {
-      localStorage.setItem("image", JSON.stringify(image));
-      setImageError("");
+    if (listingImage.url) {
+      localStorage.setItem("listingImage", JSON.stringify(listingImage));
+      setListingImageError("");
     }
-  }, [image]);
+
+    if (agentImage.url) {
+      setAgentImageError("");
+    }
+  }, [listingImage, agentImage]);
 
   const values = {
-    image,
-    setImage,
-    handleRemoveImage,
-    imageError,
-    setImageError,
+    listingImage,
+    setListingImage,
+    handleRemoveListingImage,
+    listingImageError,
+    setListingImageError,
+    agentImage,
+    setAgentImage,
+    handleRemoveAgentImage,
+    agentImageError,
+    setAgentImageError,
   };
 
   return (

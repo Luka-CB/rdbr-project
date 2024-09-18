@@ -46,7 +46,10 @@ const Agent: React.FC = () => {
               {agent?.name === "default" ? (
                 <div
                   className={styles.addAgent}
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => {
+                    setIsModalOpen(true);
+                    toggleAgentDropdown(false);
+                  }}
                 >
                   <PlusCircleIcon />
                   <span>დაამატე აგენტი</span>
