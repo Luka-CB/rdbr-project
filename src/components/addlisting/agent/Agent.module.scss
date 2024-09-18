@@ -12,6 +12,7 @@
   }
 
   .inputBox {
+    position: relative;
     margin-top: 22px;
     display: flex;
     flex-direction: column;
@@ -23,7 +24,8 @@
     }
 
     .selectInput,
-    .selectInputActive {
+    .selectInputActive,
+    .selectInputError {
       border: 1px solid $clr-text-gray;
       border-radius: 6px;
       width: 100%;
@@ -33,14 +35,30 @@
       justify-content: space-between;
       padding: 0 10px;
 
-      span {
+      .value {
         color: rgba($clr-text-dark, 60%);
+      }
+
+      .valueActive {
+        color: $clr-text-dark;
       }
     }
 
     .selectInputActive {
       border-bottom-left-radius: unset;
       border-bottom-right-radius: unset;
+    }
+
+    .selectInputError {
+      border-color: $clr-primary;
+    }
+
+    small {
+      position: absolute;
+      top: 70px;
+      color: $clr-primary;
+      font-size: 14px;
+      font-family: 500;
     }
   }
 
@@ -60,8 +78,7 @@
       display: none;
     }
 
-    .agent {
-      padding: 12px 10px;
+    .agentWrapper {
       transition: all 0.1s ease-in-out;
       cursor: pointer;
 
@@ -70,11 +87,24 @@
       }
 
       .addAgent {
+        padding: 12px 10px;
         display: flex;
         align-items: center;
 
         span {
           margin-left: 8px;
+        }
+      }
+
+      .agent {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 12px 10px;
+
+        span {
+          color: $clr-text-dark;
         }
       }
     }

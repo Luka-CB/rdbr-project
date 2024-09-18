@@ -11,6 +11,7 @@
   border-bottom-right-radius: 10px;
   box-shadow: 4px 4px 6px #02152611;
   overflow-y: scroll;
+  z-index: 1;
 
   &::-webkit-scrollbar {
     display: none;

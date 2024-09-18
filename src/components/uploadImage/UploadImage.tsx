@@ -4,11 +4,15 @@ import styles from "./UploadImage.module.scss";
 import { ImageContext } from "../../context/imageContext";
 
 const UploadImage: React.FC = () => {
-  const { image, setImage, handleRemoveImage } = useContext(ImageContext);
+  const { image, imageError, setImageError, setImage, handleRemoveImage } =
+    useContext(ImageContext);
 
   const handleChooseFile = (file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
+      if (file.size > 1000000) {
+        return setImageError("სურათი არ უნდა აღებმატებოდეს 1mb-ს ზომაში!");
+      }
       setImage({
         size: file.size,
         url: reader.result as string,
@@ -20,7 +24,7 @@ const UploadImage: React.FC = () => {
   return (
     <div className={styles.container}>
       <b>ატვირთეთ ფოტო *</b>
-      <div className={styles.uploadBox}>
+      <div className={imageError ? styles.uploadBoxError : styles.uploadBox}>
         {image?.url ? (
           <div className={styles.image}>
             <img src={image?.url} alt="image" />
@@ -31,6 +35,7 @@ const UploadImage: React.FC = () => {
         ) : (
           <label htmlFor="file">
             <PlusCircleIcon />
+            {imageError ? <small>{imageError}</small> : null}
           </label>
         )}
       </div>

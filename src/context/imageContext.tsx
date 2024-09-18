@@ -14,12 +14,15 @@ interface contextIface {
   image: imageIface;
   setImage: any;
   handleRemoveImage: () => void;
+  imageError: string;
+  setImageError: any;
 }
 
 export const ImageContext = createContext({} as contextIface);
 
 const ImageProvider = ({ children }: childrenIFace) => {
   const [image, setImage] = useState(imageFromStorage as imageIface);
+  const [imageError, setImageError] = useState("");
 
   const handleRemoveImage = () => {
     setImage({} as imageIface);
@@ -29,6 +32,7 @@ const ImageProvider = ({ children }: childrenIFace) => {
   useEffect(() => {
     if (image.url) {
       localStorage.setItem("image", JSON.stringify(image));
+      setImageError("");
     }
   }, [image]);
 
@@ -36,6 +40,8 @@ const ImageProvider = ({ children }: childrenIFace) => {
     image,
     setImage,
     handleRemoveImage,
+    imageError,
+    setImageError,
   };
 
   return (

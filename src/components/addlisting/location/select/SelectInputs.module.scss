@@ -12,7 +12,8 @@
   }
 
   .selectInput,
-  .selectInputActive {
+  .selectInputActive,
+  .selectInputError {
     border: 1px solid $clr-text-gray;
     border-radius: 6px;
     width: 384px;
@@ -35,5 +36,17 @@
   .selectInputActive {
     border-bottom-left-radius: unset;
     border-bottom-right-radius: unset;
+  }
+
+  .selectInputError {
+    border-color: $clr-primary;
+  }
+
+  small {
+    position: absolute;
+    top: 70px;
+    font-size: 14px;
+    font-family: 500;
+    color: $clr-primary;
   }
 }

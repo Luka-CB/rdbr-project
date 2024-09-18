@@ -3,9 +3,7 @@ import styles from "./Type.module.scss";
 import { AddListingFormContext } from "../../../context/addListingFormContext";
 
 const Type: React.FC = () => {
-  const { handleSetIsRental, isRentalError, isRental } = useContext(
-    AddListingFormContext
-  );
+  const { handleSetIsRental, isRental } = useContext(AddListingFormContext);
 
   return (
     <div className={styles.container}>
@@ -34,7 +32,6 @@ const Type: React.FC = () => {
           <label htmlFor="forRant">ქირავდება</label>
         </div>
       </div>
-      {isRentalError ? <small>{isRentalError}</small> : null}
     </div>
   );
 };

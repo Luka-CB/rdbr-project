@@ -8,7 +8,7 @@ const atLeastFiveWords = /^(?:\b\w+\b[\s\r\n]*){5,}$/;
 export const addListingSchema = yup.object().shape({
   address: yup.string().required().min(2),
   zip_code: yup.string().required().matches(onlyNumbers),
-  price: yup.string().required().matches(onlyNumbers),
+  price: yup.string().required().matches(onlyNumbersAndDecimal),
   area: yup.string().required().matches(onlyNumbersAndDecimal),
   bedrooms: yup
     .string()

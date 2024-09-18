@@ -11,7 +11,8 @@
     margin-bottom: 5px;
   }
 
-  .uploadBox {
+  .uploadBox,
+  .uploadBoxError {
     width: 100%;
     height: 120px;
     border: 1.5px dashed #2d3648;
@@ -54,12 +55,29 @@
     }
 
     label {
+      position: relative;
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+
+      small {
+        position: absolute;
+        top: 90px;
+        color: $clr-primary;
+        font-size: 14px;
+        font-family: 500;
+      }
+    }
+  }
+
+  .uploadBoxError {
+    border-color: $clr-primary;
+
+    &:hover {
+      border-color: $clr-primary-hover;
     }
   }
 }

@@ -14,9 +14,17 @@ interface contextIFace {
   agents: agentIFace[];
   isAgentDropdownOpen: boolean;
   toggleAgentDropdown: (value: boolean) => void;
+  pickedAgent: agentIFace;
+  agentError: string;
+  setAgentError: any;
+  handlePickAgent: (agent: agentIFace) => void;
 }
 
 export const AgentContext = createContext({} as contextIFace);
+
+const agentFromStorage = localStorage.getItem("agent")
+  ? JSON.parse(localStorage.getItem("agent") || "")
+  : {};
 
 const AgentProvider = ({ children }: childrenIFace) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,9 +36,20 @@ const AgentProvider = ({ children }: childrenIFace) => {
     { id: 2, name: "brian", surname: "o'connel", avatar: "" },
     { id: 3, name: "neccl", surname: "bordoc", avatar: "" },
   ]);
+  const [pickedAgent, setPickedAgent] = useState(
+    agentFromStorage as agentIFace
+  );
+  const [agentError, setAgentError] = useState("");
 
   const toggleAgentDropdown = (value: boolean) => {
     setIsAgentDropdownOpen(value);
+  };
+
+  const handlePickAgent = (agent: agentIFace) => {
+    setPickedAgent(agent);
+    setIsAgentDropdownOpen(false);
+    setAgentError("");
+    localStorage.setItem("agent", JSON.stringify(agent));
   };
 
   const values = {
@@ -39,6 +58,10 @@ const AgentProvider = ({ children }: childrenIFace) => {
     agents,
     isAgentDropdownOpen,
     toggleAgentDropdown,
+    pickedAgent,
+    agentError,
+    setAgentError,
+    handlePickAgent,
   };
 
   return (

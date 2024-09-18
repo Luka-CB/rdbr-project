@@ -4,8 +4,15 @@ import styles from "./Agent.module.scss";
 import { AgentContext } from "../../../context/agentContext";
 
 const Agent: React.FC = () => {
-  const { agents, isAgentDropdownOpen, toggleAgentDropdown, setIsModalOpen } =
-    useContext(AgentContext);
+  const {
+    agents,
+    handlePickAgent,
+    pickedAgent,
+    agentError,
+    isAgentDropdownOpen,
+    toggleAgentDropdown,
+    setIsModalOpen,
+  } = useContext(AgentContext);
 
   return (
     <div className={styles.container}>
@@ -14,19 +21,28 @@ const Agent: React.FC = () => {
         <label>აირჩიე *</label>
         <div
           className={
-            isAgentDropdownOpen ? styles.selectInputActive : styles.selectInput
+            agentError
+              ? styles.selectInputError
+              : isAgentDropdownOpen
+              ? styles.selectInputActive
+              : styles.selectInput
           }
           onClick={() => toggleAgentDropdown(!isAgentDropdownOpen)}
         >
-          <span>აირჩიე აგენტი</span>
+          <span className={pickedAgent?.id ? styles.valueActive : styles.value}>
+            {pickedAgent?.id
+              ? `${pickedAgent?.name} ${pickedAgent?.surname}`
+              : "აირჩიე აგენტი"}
+          </span>
           {isAgentDropdownOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
+        {agentError ? <small>{agentError}</small> : null}
       </div>
 
       {isAgentDropdownOpen ? (
         <div className={styles.dropdown} onClick={(e) => e.stopPropagation()}>
           {agents?.map((agent) => (
-            <div className={styles.agent} key={agent.id}>
+            <div className={styles.agentWrapper} key={agent.id}>
               {agent?.name === "default" ? (
                 <div
                   className={styles.addAgent}
@@ -36,9 +52,14 @@ const Agent: React.FC = () => {
                   <span>დაამატე აგენტი</span>
                 </div>
               ) : (
-                <span>
-                  {agent?.name} {agent?.surname}
-                </span>
+                <div
+                  className={styles.agent}
+                  onClick={() => handlePickAgent(agent)}
+                >
+                  <span>
+                    {agent?.name} {agent?.surname}
+                  </span>
+                </div>
               )}
             </div>
           ))}

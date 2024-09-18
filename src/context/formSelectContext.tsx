@@ -7,19 +7,35 @@ interface contextIFace {
   toggleRegionSelect: (value: boolean) => void;
   pickedRegion: regionIFace;
   handlePickRegion: (region: regionIFace) => void;
+  regionError: string;
+  setRegionError: any;
   isCitySelectActive: boolean;
   pickedCity: regionIFace;
   toggleCitySelect: (value: boolean) => void;
   handlePickCity: (city: regionIFace) => void;
+  cityError: string;
+  setCityError: any;
 }
+
+const regionFromStorage = localStorage.getItem("region")
+  ? JSON.parse(localStorage.getItem("region") || "")
+  : {};
+const cityFromStorage = localStorage.getItem("city")
+  ? JSON.parse(localStorage.getItem("city") || "")
+  : {};
 
 export const FormSelectContext = createContext({} as contextIFace);
 
 const FormSelectProvider = ({ children }: childrenIFace) => {
   const [isRegionSelectActive, setIsRegionSelectActive] = useState(false);
-  const [pickedRegion, setPickedRegion] = useState({} as regionIFace);
+  const [pickedRegion, setPickedRegion] = useState(
+    regionFromStorage as regionIFace
+  );
+  const [regionError, setRegionError] = useState("");
+
   const [isCitySelectActive, setIsCitySelectActive] = useState(false);
-  const [pickedCity, setPickedCity] = useState({} as regionIFace);
+  const [pickedCity, setPickedCity] = useState(cityFromStorage as regionIFace);
+  const [cityError, setCityError] = useState("");
 
   const toggleRegionSelect = (value: boolean) => {
     setIsRegionSelectActive(value);
@@ -34,10 +50,14 @@ const FormSelectProvider = ({ children }: childrenIFace) => {
     setPickedRegion(region);
     setIsRegionSelectActive(false);
     setPickedCity({} as regionIFace);
+    setRegionError("");
+    localStorage.setItem("region", JSON.stringify(region));
   };
   const handlePickCity = (city: regionIFace) => {
     setPickedCity(city);
     setIsCitySelectActive(false);
+    setCityError("");
+    localStorage.setItem("city", JSON.stringify(city));
   };
 
   const values = {
@@ -45,10 +65,14 @@ const FormSelectProvider = ({ children }: childrenIFace) => {
     toggleRegionSelect,
     pickedRegion,
     handlePickRegion,
+    regionError,
+    setRegionError,
     isCitySelectActive,
     pickedCity,
     toggleCitySelect,
     handlePickCity,
+    cityError,
+    setCityError,
   };
 
   return (

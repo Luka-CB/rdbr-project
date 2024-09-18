@@ -12,9 +12,11 @@ const SelectInputs: React.FC = () => {
     isRegionSelectActive,
     toggleRegionSelect,
     pickedRegion,
+    regionError,
     isCitySelectActive,
     toggleCitySelect,
     pickedCity,
+    cityError,
   } = useContext(FormSelectContext);
 
   const handleOpenRegions = () => {
@@ -37,7 +39,11 @@ const SelectInputs: React.FC = () => {
         <label>რეგიონი *</label>
         <div
           className={
-            isRegionSelectActive ? styles.selectInputActive : styles.selectInput
+            regionError
+              ? styles.selectInputError
+              : isRegionSelectActive
+              ? styles.selectInputActive
+              : styles.selectInput
           }
           onClick={(e) => {
             e.stopPropagation();
@@ -55,13 +61,20 @@ const SelectInputs: React.FC = () => {
         {isRegionSelectActive ? (
           <Dropdown data={regions} type="regions" />
         ) : null}
+
+        {regionError ? <small>{regionError}</small> : null}
       </div>
+
       {pickedRegion?.id ? (
         <div className={styles.inputBox}>
           <label>ქალაქი *</label>
           <div
             className={
-              isCitySelectActive ? styles.selectInputActive : styles.selectInput
+              cityError
+                ? styles.selectInputError
+                : isCitySelectActive
+                ? styles.selectInputActive
+                : styles.selectInput
             }
             onClick={(e) => {
               e.stopPropagation();
@@ -83,6 +96,8 @@ const SelectInputs: React.FC = () => {
               type="cities"
             />
           ) : null}
+
+          {cityError ? <small>{cityError}</small> : null}
         </div>
       ) : null}
     </>

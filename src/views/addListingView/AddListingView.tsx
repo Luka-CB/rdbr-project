@@ -4,22 +4,63 @@ import { addListingSchema } from "../../utils/inputValidationSchemas";
 import styles from "./AddlistingView.module.scss";
 import { useContext, useEffect } from "react";
 import { AddListingFormContext } from "../../context/addListingFormContext";
+import { FormSelectContext } from "../../context/formSelectContext";
+import { ImageContext } from "../../context/imageContext";
+import { AgentContext } from "../../context/agentContext";
 
 const AddListingView: React.FC = () => {
-  const { isRental, setIsRentalError } = useContext(AddListingFormContext);
+  const { image, setImageError } = useContext(ImageContext);
+  const { pickedAgent, setAgentError } = useContext(AgentContext);
+  const { isRental } = useContext(AddListingFormContext);
+  const { pickedRegion, pickedCity, setRegionError, setCityError } =
+    useContext(FormSelectContext);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  const scrollToTop = (top = 0) => {
+    window.scrollTo({ top, left: 0, behavior: "smooth" });
   };
 
   const onSubmit = () => {
-    if (!isRental) {
-      scrollToTop();
-      setIsRentalError("ქთხოვთ აირჩიოთ გარიგების ტიპი!");
+    if (!pickedRegion?.id) {
+      scrollToTop(200);
+      setRegionError("გთხოვთ აირჩიოთ რეგიონი!");
       return;
     }
 
-    console.log("so");
+    if (!pickedCity?.id) {
+      scrollToTop(200);
+      setCityError("გთხოვთ აირჩიოთ ქალაქი!");
+      return;
+    }
+
+    if (!image?.url) {
+      setImageError("გთხოვთ აირჩიოთ სურათი!");
+      return;
+    }
+
+    if (!pickedAgent?.id) {
+      setAgentError("გთხოვთ აირჩიოთ აგენტი!");
+      return;
+    }
+
+    const inputData = localStorage.getItem("inputData")
+      ? JSON.parse(localStorage.getItem("inputData") || "")
+      : {};
+
+    const data = {
+      address: inputData?.address,
+      image: image?.url,
+      region_id: pickedRegion?.id,
+      description: inputData?.description,
+      city_id: pickedCity?.id,
+      zip_code: inputData?.zip_code,
+      price: +inputData?.price,
+      area: +inputData?.area,
+      bedrooms: +inputData?.bedrooms,
+      isRental: +isRental,
+      agent_id: pickedAgent?.id,
+    };
+
+    console.log(data);
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
