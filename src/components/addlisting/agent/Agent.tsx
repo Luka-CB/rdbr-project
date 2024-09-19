@@ -12,7 +12,13 @@ const Agent: React.FC = () => {
     isAgentDropdownOpen,
     toggleAgentDropdown,
     setIsModalOpen,
+    getAgents,
   } = useContext(AgentContext);
+
+  const handleOpenDropdown = () => {
+    toggleAgentDropdown(!isAgentDropdownOpen);
+    getAgents();
+  };
 
   return (
     <div className={styles.container}>
@@ -27,7 +33,7 @@ const Agent: React.FC = () => {
               ? styles.selectInputActive
               : styles.selectInput
           }
-          onClick={() => toggleAgentDropdown(!isAgentDropdownOpen)}
+          onClick={handleOpenDropdown}
         >
           <span className={pickedAgent?.id ? styles.valueActive : styles.value}>
             {pickedAgent?.id
@@ -41,31 +47,29 @@ const Agent: React.FC = () => {
 
       {isAgentDropdownOpen ? (
         <div className={styles.dropdown} onClick={(e) => e.stopPropagation()}>
-          {agents?.map((agent) => (
-            <div className={styles.agentWrapper} key={agent.id}>
-              {agent?.name === "default" ? (
-                <div
-                  className={styles.addAgent}
-                  onClick={() => {
-                    setIsModalOpen(true);
-                    toggleAgentDropdown(false);
-                  }}
-                >
-                  <PlusCircleIcon />
-                  <span>დაამატე აგენტი</span>
-                </div>
-              ) : (
-                <div
-                  className={styles.agent}
-                  onClick={() => handlePickAgent(agent)}
-                >
-                  <span>
-                    {agent?.name} {agent?.surname}
-                  </span>
-                </div>
-              )}
+          <div className={styles.agentWrapper}>
+            <div
+              className={styles.addAgent}
+              onClick={() => {
+                setIsModalOpen(true);
+                toggleAgentDropdown(false);
+              }}
+            >
+              <PlusCircleIcon />
+              <span>დაამატე აგენტი</span>
             </div>
-          ))}
+            {agents?.map((agent) => (
+              <div
+                key={agent.id}
+                className={styles.agent}
+                onClick={() => handlePickAgent(agent)}
+              >
+                <span>
+                  {agent?.name} {agent?.surname}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       ) : null}
     </div>

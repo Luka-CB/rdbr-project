@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CheckIcon } from "../../svgs";
 import UploadImage from "../uploadImage/UploadImage";
 import styles from "./AddAgentModal.module.scss";
@@ -8,7 +8,8 @@ import { agentSchema } from "../../utils/inputValidationSchemas";
 import { ImageContext } from "../../context/imageContext";
 
 const AddAgentModal: React.FC = () => {
-  const { setIsModalOpen } = useContext(AgentContext);
+  const { setIsModalOpen, addAgent, addAgentSuccess, setAddAgentSuccess } =
+    useContext(AgentContext);
   const { agentImage, setAgentImageError, handleRemoveAgentImage } =
     useContext(ImageContext);
 
@@ -17,7 +18,17 @@ const AddAgentModal: React.FC = () => {
       return setAgentImageError("გთხოვთ აირჩიოთ სურათი!");
     }
 
-    console.log({ ...values, image: agentImage.url });
+    const base64 = agentImage.url?.split("base64,")[1];
+    let arrayBuffer;
+    if (base64) {
+      const binary = atob(base64);
+      const len = binary.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
+      arrayBuffer = bytes.buffer;
+    }
+
+    addAgent({ ...values, avatar: arrayBuffer });
   };
 
   const {
@@ -28,6 +39,7 @@ const AddAgentModal: React.FC = () => {
     handleBlur,
     handleSubmit,
     resetForm,
+    isSubmitting,
   } = useFormik({
     initialValues: {
       name: "",
@@ -39,11 +51,18 @@ const AddAgentModal: React.FC = () => {
     onSubmit,
   });
 
-  const handleCancelBtn = () => {
+  const handleCancel = () => {
     resetForm();
     handleRemoveAgentImage();
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (addAgentSuccess) {
+      handleCancel();
+      setAddAgentSuccess(false);
+    }
+  }, [addAgentSuccess]);
 
   return (
     <div className={styles.modalBg} onClick={() => setIsModalOpen(false)}>
@@ -197,12 +216,17 @@ const AddAgentModal: React.FC = () => {
             <button
               type="button"
               className={styles.cancelBtn}
-              onClick={handleCancelBtn}
+              onClick={handleCancel}
+              disabled={isSubmitting}
             >
               გაუქმება
             </button>
-            <button type="submit" className={styles.addBtn}>
-              დაამატე აგენტი
+            <button
+              type="submit"
+              className={styles.addBtn}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "..." : "დაამატე აგენტი"}
             </button>
           </div>
         </form>

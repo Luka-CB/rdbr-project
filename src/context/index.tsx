@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 import RegionsProvider from "./regions";
 import FiltersProvider from "./filters";
-import AddListingFormProvider from "./addListingFormContext";
+import TransactionTypeProvider from "./transactionTypeContext";
 import FormSelectProvider from "./formSelectContext";
 import ImageProvider from "./imageContext";
 import AddAgentProvider from "./agentContext";
+import ListingProvider from "./listingContext";
 
 export interface childrenIFace {
   children: ReactNode;
@@ -14,13 +15,15 @@ const ContextProvider = ({ children }: childrenIFace) => {
   return (
     <FiltersProvider>
       <RegionsProvider>
-        <AddListingFormProvider>
+        <TransactionTypeProvider>
           <FormSelectProvider>
             <ImageProvider>
-              <AddAgentProvider>{children}</AddAgentProvider>
+              <AddAgentProvider>
+                <ListingProvider>{children}</ListingProvider>
+              </AddAgentProvider>
             </ImageProvider>
           </FormSelectProvider>
-        </AddListingFormProvider>
+        </TransactionTypeProvider>
       </RegionsProvider>
     </FiltersProvider>
   );

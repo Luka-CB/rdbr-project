@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Filters, PickedFilters } from "../../components";
 import { PlusIcon } from "../../svgs";
 import styles from "./HomeView.module.scss";
 import { useNavigate } from "react-router-dom";
+import { ListingContext } from "../../context/listingContext";
 
 const HomeView: React.FC = () => {
   const [plusIconColor, setPlusIconColor] = useState("#f93b1d");
 
+  const { getListings } = useContext(ListingContext);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getListings();
+  }, []);
 
   return (
     <main className={styles.container}>

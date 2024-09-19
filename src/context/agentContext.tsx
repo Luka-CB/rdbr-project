@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
 import { childrenIFace } from ".";
+import api from "../utils/axios";
 
 interface agentIFace {
-  id: number | string;
+  id?: number | string;
   name: string;
   surname: string;
-  avatar: string;
+  phone?: string;
+  avatar: string | any;
 }
 
 interface contextIFace {
@@ -18,6 +20,11 @@ interface contextIFace {
   agentError: string;
   setAgentError: any;
   handlePickAgent: (agent: agentIFace) => void;
+  addAgent: (agent: agentIFace) => void;
+  addAgentSuccess: boolean;
+  setAddAgentSuccess: any;
+  getAgents: () => void;
+  resetAgent: () => void;
 }
 
 export const AgentContext = createContext({} as contextIFace);
@@ -29,17 +36,12 @@ const agentFromStorage = localStorage.getItem("agent")
 const AgentProvider = ({ children }: childrenIFace) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAgentDropdownOpen, setIsAgentDropdownOpen] = useState(false);
-  const [agents, setAgents] = useState<agentIFace[]>([
-    { id: "default", name: "default", surname: "default", avatar: "default" },
-    { id: 0, name: "john", surname: "doe", avatar: "" },
-    { id: 1, name: "jane", surname: "doeson", avatar: "" },
-    { id: 2, name: "brian", surname: "o'connel", avatar: "" },
-    { id: 3, name: "neccl", surname: "bordoc", avatar: "" },
-  ]);
+  const [agents, setAgents] = useState<agentIFace[]>([]);
   const [pickedAgent, setPickedAgent] = useState(
     agentFromStorage as agentIFace
   );
   const [agentError, setAgentError] = useState("");
+  const [addAgentSuccess, setAddAgentSuccess] = useState(false);
 
   const toggleAgentDropdown = (value: boolean) => {
     setIsAgentDropdownOpen(value);
@@ -52,6 +54,38 @@ const AgentProvider = ({ children }: childrenIFace) => {
     localStorage.setItem("agent", JSON.stringify(agent));
   };
 
+  const resetAgent = () => {
+    setPickedAgent({} as agentIFace);
+    localStorage.removeItem("agent");
+  };
+
+  const addAgent = async (agent: agentIFace) => {
+    try {
+      const { data } = await api.post("/agents", agent, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (data) {
+        setAddAgentSuccess(true);
+        setPickedAgent(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getAgents = async () => {
+    try {
+      const { data } = await api.get("/agents");
+
+      if (data) {
+        setAgents(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const values = {
     isModalOpen,
     setIsModalOpen,
@@ -62,6 +96,11 @@ const AgentProvider = ({ children }: childrenIFace) => {
     agentError,
     setAgentError,
     handlePickAgent,
+    addAgent,
+    addAgentSuccess,
+    setAddAgentSuccess,
+    getAgents,
+    resetAgent,
   };
 
   return (

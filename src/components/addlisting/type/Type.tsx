@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import styles from "./Type.module.scss";
-import { AddListingFormContext } from "../../../context/addListingFormContext";
+import { TransactionTypeContext } from "../../../context/transactionTypeContext";
 
 const Type: React.FC = () => {
-  const { handleSetIsRental, isRental } = useContext(AddListingFormContext);
+  const { handleSetIsRental, isRental } = useContext(TransactionTypeContext);
 
   return (
     <div className={styles.container}>

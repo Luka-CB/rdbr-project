@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { childrenIFace } from ".";
-import { regionIFace } from "./regions";
+import { cityIFace, regionIFace } from "./regions";
 
 interface contextIFace {
   isRegionSelectActive: boolean;
@@ -15,6 +15,7 @@ interface contextIFace {
   handlePickCity: (city: regionIFace) => void;
   cityError: string;
   setCityError: any;
+  resetLocationSelect: () => void;
 }
 
 const regionFromStorage = localStorage.getItem("region")
@@ -60,6 +61,13 @@ const FormSelectProvider = ({ children }: childrenIFace) => {
     localStorage.setItem("city", JSON.stringify(city));
   };
 
+  const resetLocationSelect = () => {
+    setPickedRegion({} as regionIFace);
+    setPickedCity({} as cityIFace);
+    localStorage.removeItem("region");
+    localStorage.removeItem("city");
+  };
+
   const values = {
     isRegionSelectActive,
     toggleRegionSelect,
@@ -73,6 +81,7 @@ const FormSelectProvider = ({ children }: childrenIFace) => {
     handlePickCity,
     cityError,
     setCityError,
+    resetLocationSelect,
   };
 
   return (
