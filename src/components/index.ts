@@ -8,6 +8,7 @@ import Details from "./addlisting/details/Details";
 import Agent from "./addlisting/agent/Agent";
 
 import UploadImage from "./uploadImage/UploadImage";
+import ListingCard from "./listingCard/ListingCard";
 
 export {
   Layout,
@@ -18,4 +19,5 @@ export {
   Location,
   UploadImage,
   Agent,
+  ListingCard,
 };

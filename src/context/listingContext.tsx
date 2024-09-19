@@ -3,7 +3,7 @@ import { childrenIFace } from ".";
 import api from "../utils/axios";
 import { regionIFace } from "./regions";
 
-interface listingIFace {
+export interface listingIFace {
   id: string;
   address: string;
   zip_code: string;
@@ -62,7 +62,6 @@ const ListingProvider = ({ children }: childrenIFace) => {
       if (data) {
         setAddListingLoading(false);
         setAddListingSuccess(true);
-        console.log(data);
       }
     } catch (error) {
       setAddListingLoading(false);
@@ -74,7 +73,7 @@ const ListingProvider = ({ children }: childrenIFace) => {
     try {
       const { data } = await api("/real-estates");
 
-      if (data) console.log(data);
+      if (data) setListings(data);
     } catch (error) {
       console.error(error);
     }

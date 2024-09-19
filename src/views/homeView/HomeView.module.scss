@@ -59,4 +59,13 @@
       }
     }
   }
+
+  .content {
+    margin-top: 32px;
+    padding-bottom: 90px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    gap: 20px;
+  }
 }

@@ -6,6 +6,10 @@ import CloseIcon from "./CloseIcon";
 import CheckIcon from "./CheckIcon";
 import PlusCircleIcon from "./PlusCircleIcon";
 import TrashIcon from "./TrachIcon";
+import LocationIcon from "./LocationIcon";
+import BedIcon from "./BedIcon";
+import AreaIcon from "./AreaIcon";
+import ZipCodeIcon from "./ZipCodeIcon";
 
 export {
   ChevronDown,
@@ -16,4 +20,8 @@ export {
   CheckIcon,
   PlusCircleIcon,
   TrashIcon,
+  LocationIcon,
+  BedIcon,
+  AreaIcon,
+  ZipCodeIcon,
 };
