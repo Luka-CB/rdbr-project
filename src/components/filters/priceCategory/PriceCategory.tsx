@@ -34,13 +34,16 @@ const PriceCategory: React.FC = () => {
   }, [pickedMaxValue, pickedMinValue]);
 
   const handleChooseBtn = () => {
-    if (pickedMaxValue || pickedMinValue) {
+    if (pickedMaxValue && pickedMinValue) {
       if (pickedMaxValue && pickedMinValue) {
         if (+pickedMinValue > +pickedMaxValue) return;
       }
       setPickedFilters((prev: any) => ({
         ...prev,
-        priceRange: { min: +pickedMinValue, max: +pickedMaxValue },
+        priceRange: {
+          min: +pickedMinValue,
+          max: +pickedMaxValue,
+        },
       }));
       togglePriceDropdown(false);
     }

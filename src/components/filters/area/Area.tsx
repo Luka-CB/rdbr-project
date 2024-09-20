@@ -33,7 +33,7 @@ const Area: React.FC = () => {
   }, [pickedMaxValue, pickedMinValue]);
 
   const handleChooseBtn = () => {
-    if (pickedMaxValue || pickedMinValue) {
+    if (pickedMaxValue && pickedMinValue) {
       if (pickedMaxValue && pickedMinValue) {
         if (+pickedMinValue > +pickedMaxValue) return;
       }

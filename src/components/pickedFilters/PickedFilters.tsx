@@ -80,7 +80,7 @@ const PickedFilters: React.FC = () => {
               მ<sup>2</sup> -{" "}
               {pickedFilters?.areaRange?.max
                 ? pickedFilters?.areaRange?.max
-                : "~"}{" "}
+                : ">"}{" "}
               მ<sup>2</sup>
             </span>
             <div className={styles.closeIcon} onClick={handleRemoveArea}>
@@ -105,7 +105,7 @@ const PickedFilters: React.FC = () => {
                 <span>
                   {pickedFilters?.priceRange?.max
                     ? pickedFilters?.priceRange?.max
-                    : "~"}
+                    : ">"}
                 </span>
                 <LariIcon />
               </div>

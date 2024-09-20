@@ -79,6 +79,30 @@ const ListingProvider = ({ children }: childrenIFace) => {
     }
   };
 
+  // useEffect(() => {
+  //   if (
+  //     pickedFilters?.areaRange?.max ||
+  //     pickedFilters?.areaRange?.min ||
+  //     pickedFilters?.bedrooms ||
+  //     pickedFilters?.priceRange?.max ||
+  //     pickedFilters?.priceRange?.min ||
+  //     pickedFilters?.regions?.length
+  //   ) {
+  //     const newArr = listings?.filter(
+  //       (listing) =>
+  //         listing.area <= pickedFilters?.areaRange?.max ||
+  //         listing.area >= pickedFilters?.areaRange?.min ||
+  //         listing.price <= pickedFilters?.priceRange?.max ||
+  //         listing?.price >= pickedFilters?.priceRange?.min ||
+  //         listing.bedrooms === pickedFilters?.bedrooms ||
+  //         pickedFilters?.regions?.includes(listing?.city?.region?.name)
+  //     );
+  //     setTest(newArr);
+  //   }
+  // }, [pickedFilters]);
+
+  // console.log(test);
+
   const values = {
     listings,
     addListingSuccess,
