@@ -17,7 +17,11 @@ const Slider: React.FC<propsIFace> = ({ region_id, listing_id }) => {
   const { getListings, listings } = useContext(ListingContext);
 
   useEffect(() => {
-    getListings();
+    if (listings?.length) {
+      return;
+    } else {
+      getListings();
+    }
   }, []);
 
   let similarListings: listingIFace[] = [];

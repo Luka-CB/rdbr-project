@@ -6,10 +6,13 @@ import { FiltersContext } from "../../context/filters";
 import { FormSelectContext } from "../../context/formSelectContext";
 import AddAgentModal from "../addAgent/AddAgentModal";
 import { AgentContext } from "../../context/agentContext";
+import { ListingContext } from "../../context/listingContext";
 
 const Layout: React.FC = () => {
   const { isModalOpen, isAgentDropdownOpen, toggleAgentDropdown } =
     useContext(AgentContext);
+
+  const { setIsDelModalOpen, isDelModalOpen } = useContext(ListingContext);
 
   const {
     isRegionDropdownOpen,
@@ -50,12 +53,12 @@ const Layout: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isModalOpen) {
+    if (isModalOpen || isDelModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [isModalOpen]);
+  }, [isModalOpen, isDelModalOpen]);
 
   return (
     <main className={styles.container} onClick={handleClosePopups}>

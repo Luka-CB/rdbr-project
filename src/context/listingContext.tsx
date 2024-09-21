@@ -49,6 +49,12 @@ interface contextIFace {
   addListingLoading: boolean;
   getListing: (id: number) => void;
   listing: listingIFace;
+  isDelModalOpen: boolean;
+  setIsDelModalOpen: any;
+  isDelListingLoading: boolean;
+  isDelListingSuccess: boolean;
+  setIsDelListingSuccess: any;
+  deleteListing: (id: number) => void;
 }
 
 export const ListingContext = createContext({} as contextIFace);
@@ -58,6 +64,9 @@ const ListingProvider = ({ children }: childrenIFace) => {
   const [listing, setListing] = useState({} as listingIFace);
   const [addListingLoading, setAddListingLoading] = useState(false);
   const [addListingSuccess, setAddListingSuccess] = useState(false);
+  const [isDelModalOpen, setIsDelModalOpen] = useState(false);
+  const [isDelListingLoading, setIsDelListingLoading] = useState(false);
+  const [isDelListingSuccess, setIsDelListingSuccess] = useState(false);
 
   const addListing = async (listing: postListingIFace) => {
     setAddListingLoading(true);
@@ -99,6 +108,21 @@ const ListingProvider = ({ children }: childrenIFace) => {
     }
   };
 
+  const deleteListing = async (id: number) => {
+    setIsDelListingLoading(true);
+    try {
+      const { data } = await api.delete(`/real-estates/${id}`);
+
+      if (data) {
+        setIsDelListingLoading(false);
+        setIsDelListingSuccess(true);
+      }
+    } catch (error) {
+      setIsDelListingLoading(false);
+      console.error(error);
+    }
+  };
+
   const values = {
     listings,
     addListingSuccess,
@@ -108,6 +132,12 @@ const ListingProvider = ({ children }: childrenIFace) => {
     addListingLoading,
     getListing,
     listing,
+    isDelModalOpen,
+    setIsDelModalOpen,
+    isDelListingLoading,
+    isDelListingSuccess,
+    setIsDelListingSuccess,
+    deleteListing,
   };
 
   return (

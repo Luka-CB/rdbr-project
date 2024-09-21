@@ -1,8 +1,12 @@
-const CloseIcon: React.FC = () => {
+interface propsIFace {
+  size?: string;
+}
+
+const CloseIcon: React.FC<propsIFace> = ({ size = 15 }) => {
   return (
     <svg
-      width="14"
-      height="15"
+      width={size}
+      height={size}
       viewBox="0 0 14 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

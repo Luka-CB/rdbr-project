@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Slider } from "../../components";
+import { DeleteModal, Slider } from "../../components";
 import {
   AreaIcon,
   BedIcon,
@@ -16,7 +16,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 
 const Listing: React.FC = () => {
-  const { getListing, listing } = useContext(ListingContext);
+  const { getListing, listing, isDelModalOpen, setIsDelModalOpen } =
+    useContext(ListingContext);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -105,13 +106,20 @@ const Listing: React.FC = () => {
               </div>
             </div>
           </div>
-          <button className={styles.deleteBtn}>ლისტინგის წაშლა</button>
+          <button
+            className={styles.deleteBtn}
+            onClick={() => setIsDelModalOpen(true)}
+          >
+            ლისტინგის წაშლა
+          </button>
         </div>
       </section>
       <section className={styles.similarLocations}>
         <h2 className={styles.title}>ბინები მსგავს ლოკაციაზე</h2>
         <Slider region_id={listing?.city?.region_id} listing_id={listing?.id} />
       </section>
+
+      {isDelModalOpen ? <DeleteModal listing_id={+listing?.id} /> : null}
     </main>
   );
 };
