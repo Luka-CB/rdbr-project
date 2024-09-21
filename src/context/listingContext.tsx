@@ -2,10 +2,13 @@ import { createContext, useState } from "react";
 import { childrenIFace } from ".";
 import api from "../utils/axios";
 import { regionIFace } from "./regions";
+import { agentIFace } from "./agentContext";
 
 export interface listingIFace {
   id: string;
   address: string;
+  agent?: agentIFace;
+  agent_id?: number;
   zip_code: string;
   price: number;
   area: number;
@@ -19,6 +22,8 @@ export interface listingIFace {
     region_id: number;
     region: regionIFace;
   };
+  created_at?: string | number | Date | any;
+  description?: string;
 }
 
 interface postListingIFace {
@@ -42,12 +47,15 @@ interface contextIFace {
   addListing: (listing: postListingIFace) => void;
   getListings: () => void;
   addListingLoading: boolean;
+  getListing: (id: number) => void;
+  listing: listingIFace;
 }
 
 export const ListingContext = createContext({} as contextIFace);
 
 const ListingProvider = ({ children }: childrenIFace) => {
   const [listings, setListings] = useState<listingIFace[]>([]);
+  const [listing, setListing] = useState({} as listingIFace);
   const [addListingLoading, setAddListingLoading] = useState(false);
   const [addListingSuccess, setAddListingSuccess] = useState(false);
 
@@ -79,29 +87,17 @@ const ListingProvider = ({ children }: childrenIFace) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (
-  //     pickedFilters?.areaRange?.max ||
-  //     pickedFilters?.areaRange?.min ||
-  //     pickedFilters?.bedrooms ||
-  //     pickedFilters?.priceRange?.max ||
-  //     pickedFilters?.priceRange?.min ||
-  //     pickedFilters?.regions?.length
-  //   ) {
-  //     const newArr = listings?.filter(
-  //       (listing) =>
-  //         listing.area <= pickedFilters?.areaRange?.max ||
-  //         listing.area >= pickedFilters?.areaRange?.min ||
-  //         listing.price <= pickedFilters?.priceRange?.max ||
-  //         listing?.price >= pickedFilters?.priceRange?.min ||
-  //         listing.bedrooms === pickedFilters?.bedrooms ||
-  //         pickedFilters?.regions?.includes(listing?.city?.region?.name)
-  //     );
-  //     setTest(newArr);
-  //   }
-  // }, [pickedFilters]);
+  const getListing = async (id: number) => {
+    try {
+      const { data } = await api.get(`/real-estates/${id}`);
 
-  // console.log(test);
+      if (data) {
+        setListing(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const values = {
     listings,
@@ -110,6 +106,8 @@ const ListingProvider = ({ children }: childrenIFace) => {
     addListing,
     getListings,
     addListingLoading,
+    getListing,
+    listing,
   };
 
   return (

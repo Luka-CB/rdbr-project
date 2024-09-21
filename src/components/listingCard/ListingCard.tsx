@@ -1,18 +1,27 @@
+import { useNavigate } from "react-router-dom";
 import { listingIFace } from "../../context/listingContext";
 import { AreaIcon, BedIcon, LocationIcon, ZipCodeIcon } from "../../svgs";
 import styles from "./ListingCard.module.scss";
+import { formatPrice } from "../../utils/misc";
 
 interface propsIFace {
   listing: listingIFace;
 }
 
 const ListingCard: React.FC<propsIFace> = ({ listing }) => {
-  const formatPrice = (price: number) => {
-    return price.toLocaleString("en-US").replace(/,/g, " ");
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate({ pathname: `/listing/${listing?.id}` });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleNavigation}>
       <div className={styles.image}>
         <img src={listing?.image} alt="image" />
       </div>

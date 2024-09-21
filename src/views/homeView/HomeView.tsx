@@ -56,7 +56,7 @@ const HomeView: React.FC = () => {
           </button>
         </div>
       </header>
-      <div className={styles.content}>
+      <section className={styles.content}>
         {((pickedFilters?.areaRange?.max && pickedFilters?.areaRange?.min) ||
           (pickedFilters?.priceRange?.max && pickedFilters?.priceRange.min) ||
           pickedFilters?.bedrooms ||
@@ -78,7 +78,7 @@ const HomeView: React.FC = () => {
             ))}
           </>
         )}
-      </div>
+      </section>
     </main>
   );
 };

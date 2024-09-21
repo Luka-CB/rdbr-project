@@ -2,10 +2,11 @@ import { createContext, useState } from "react";
 import { childrenIFace } from ".";
 import api from "../utils/axios";
 
-interface agentIFace {
+export interface agentIFace {
   id?: number | string;
   name: string;
   surname: string;
+  email?: string;
   phone?: string;
   avatar: string | any;
 }

@@ -9,6 +9,7 @@ import Agent from "./addlisting/agent/Agent";
 
 import UploadImage from "./uploadImage/UploadImage";
 import ListingCard from "./listingCard/ListingCard";
+import Slider from "./slider/Slider";
 
 export {
   Layout,
@@ -20,4 +21,5 @@ export {
   UploadImage,
   Agent,
   ListingCard,
+  Slider,
 };

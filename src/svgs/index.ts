@@ -10,6 +10,10 @@ import LocationIcon from "./LocationIcon";
 import BedIcon from "./BedIcon";
 import AreaIcon from "./AreaIcon";
 import ZipCodeIcon from "./ZipCodeIcon";
+import LeftArrowIcon from "./LeftArrowIcon";
+import EmailIcon from "./EmailIcon";
+import PhoneIcon from "./PhoneIcon";
+import RightArrowIcon from "./RightArrowIcon";
 
 export {
   ChevronDown,
@@ -24,4 +28,8 @@ export {
   BedIcon,
   AreaIcon,
   ZipCodeIcon,
+  LeftArrowIcon,
+  EmailIcon,
+  PhoneIcon,
+  RightArrowIcon,
 };

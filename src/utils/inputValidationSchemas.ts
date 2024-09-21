@@ -3,7 +3,8 @@ import * as yup from "yup";
 const onlyNumbers = /^[0-9]*$/;
 const onlyNumbersAndDecimal = /^\d+(\.\d+)?$/;
 const onlyWholeNumbers = /\d+/;
-const atLeastFiveWords = /^\s*(\b\w+[.,!?;:'"-]?\s*){5,}$/;
+const atLeastFiveWords =
+  /^\s*(([\p{L}\p{N}]+)([.,!?;:'"-]*\s+)){4,}[\p{L}\p{N}]+[.,!?;:'"-]*$/u;
 
 export const addListingSchema = yup.object().shape({
   address: yup.string().required().min(2),

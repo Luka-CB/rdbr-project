@@ -1,0 +1,188 @@
+@import "../../styles/index.scss";
+
+.container {
+  padding-bottom: 228px;
+
+  .backBtn {
+    cursor: pointer;
+    width: 30px;
+  }
+
+  .details {
+    margin-top: 29px;
+    display: flex;
+    align-items: flex-start;
+
+    .col1 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .image {
+        width: 839px;
+        height: 670px;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+
+        .transactionType {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 142px;
+          height: 41px;
+          margin: 41px 0 0 41px;
+          background-color: rgba($clr-text-dark, 50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 20px;
+
+          span {
+            color: $clr-text-light;
+            font-size: 20px;
+          }
+        }
+      }
+
+      .date {
+        margin-top: 14px;
+        color: $clr-text-gray;
+        font-size: 16px;
+      }
+    }
+
+    .col2 {
+      margin-left: 68px;
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .locationInfo {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .item {
+          display: flex;
+          align-items: center;
+
+          &:not(:first-child) {
+            margin-top: 16px;
+          }
+
+          .icon {
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          span {
+            font-size: 24px;
+            color: $clr-text-gray;
+            margin-left: 4px;
+          }
+        }
+      }
+
+      .description {
+        margin-top: 40px;
+        font-size: 16px;
+        color: $clr-text-gray;
+        width: 503px;
+      }
+
+      .agent {
+        margin-top: 50px;
+        width: 503px;
+        border: 1px solid #dbdbdb;
+        border-radius: 8px;
+        padding: 24px 20px;
+
+        .person {
+          display: flex;
+          align-items: center;
+
+          .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+          }
+
+          .personInfo {
+            margin-left: 14px;
+
+            h5 {
+              font-size: 16px;
+            }
+
+            small {
+              font-size: 14px;
+              color: $clr-text-gray;
+            }
+          }
+        }
+
+        .contact {
+          margin-top: 16px;
+
+          .item {
+            display: flex;
+            align-items: center;
+
+            &:not(:first-child) {
+              margin-top: 4px;
+            }
+
+            span {
+              font-size: 14px;
+              margin-left: 5px;
+              color: $clr-text-gray;
+            }
+          }
+        }
+      }
+
+      .deleteBtn {
+        @include button();
+        margin-top: 20px;
+        width: 150px;
+        height: 37px;
+        border-radius: 8px;
+        color: $clr-text-gray;
+        background-color: transparent;
+        border-color: $clr-text-gray;
+        font-size: 12px;
+
+        &:hover {
+          background-color: $clr-text-gray;
+          color: $clr-text-light;
+        }
+      }
+    }
+  }
+
+  .similarLocations {
+    margin-top: 53px;
+
+    h2 {
+      font-size: 32px;
+    }
+  }
+}
