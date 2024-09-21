@@ -12,7 +12,7 @@ const Layout: React.FC = () => {
   const { isModalOpen, isAgentDropdownOpen, toggleAgentDropdown } =
     useContext(AgentContext);
 
-  const { setIsDelModalOpen, isDelModalOpen } = useContext(ListingContext);
+  const { isDelModalOpen } = useContext(ListingContext);
 
   const {
     isRegionDropdownOpen,

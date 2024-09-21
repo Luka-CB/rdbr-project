@@ -1,5 +1,5 @@
 import styles from "./Slider.module.scss";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { LeftArrowIcon, RightArrowIcon } from "../../svgs";
 import { useContext, useEffect, useRef } from "react";
