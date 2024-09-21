@@ -124,16 +124,20 @@ const AddListingView: React.FC = () => {
     }
   }, [values]);
 
+  const abortAddListing = () => {
+    resetForm();
+    resetAgent();
+    resetLocationSelect();
+    resetTransactionType();
+    handleRemoveListingImage();
+    localStorage.removeItem("inputData");
+    navigate({ pathname: "/" });
+  };
+
   useEffect(() => {
     if (addListingSuccess) {
-      resetForm();
-      resetAgent();
-      resetLocationSelect();
-      resetTransactionType();
-      handleRemoveListingImage();
-      localStorage.removeItem("inputData");
+      abortAddListing();
       setAddListingSuccess(false);
-      navigate({ pathname: "/" });
     }
   }, [addListingSuccess]);
 
@@ -177,6 +181,7 @@ const AddListingView: React.FC = () => {
           <button
             type="button"
             className={styles.cancelBtn}
+            onClick={abortAddListing}
             disabled={addListingLoading}
           >
             გაუქმება
